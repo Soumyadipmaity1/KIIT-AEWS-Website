@@ -1,128 +1,52 @@
-import React, { useState } from "react";
-import { Link, NavLinks, useLocation } from "react-router-dom";
-import { IoMenu } from "react-icons/io5";
-import { IoIosClose } from "react-icons/io";
-import Logo from "./kaews_logo.png";
-function Navbar2() {
-  const [isOpen, setIsOpen] = useState(true);
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
+import React from "react";
+import { NavLink, useLocation } from 'react-router-dom';
+import kaews_logo from "./kaews_logo.png";
+const navLinks = [
+  { to: "/", text: "Home" },
+  { to: "/about", text: "About" },
+  { to: "/members", text: "Members" },
+  { to: "/events", text: "Events" },
+  { to: "/gallery", text: "Gallery" },
+  { to: "/blogs", text: "Blogs" },
+  { to: "/contact", text: "Contact" },
+];
 
-  const NavItems = [
-    {
-      index: 0,
-      name: "Home",
-      path: "/",
-    },
-    {
-      index: 1,
-      name: "About",
-      path: "/about",
-    },
-    {
-      index: 2,
-      name: "Members",
-      path: "/members",
-    },
-    {
-      index: 3,
-      name: "Events",
-      path: "/events",
-    },
-    {
-      index: 4,
-      name: "Gallery",
-      path: "/gallery",
-    },
-    {
-      index: 5,
-      name: "Blogs",
-      path: "/blogs",
-    },
-    {
-      index: 6,
-      name: "Contact",
-      path: "/contact",
-    },
-  ];
-
-  const matchRoute = (route) => {
-    return route === window.location.pathname;
-  };
+const Navbar2 = () => {
+  const location = useLocation();
 
   return (
-    <div className="flex fixed top-0 font-semibold text-xl w-full bg-opacity-100 bg-[#ffffff] justify-between px-10 items-center py-1 z-50">
-      <Link to="/">
-        <img
-          src={Logo}
-          alt="logo"
-          className="h-[50px] rounded-full my-4 object-contain w-[50px]"
-        />
-      </Link>
-      <div className="hidden md:flex justify-evenly items-center gap-3 w-[50vw]">
-        {NavItems.map((element) => (
-          <div
-            key={element.index}
-            className={
-              matchRoute(element.path)
-                ? "p-3 text-black w-32 flex justify-center items-center relative"
-                : "p-3 hover:border-b-4 hover:border-b-orange-400 text-black w-32 flex justify-center items-center relative"
-            }
-          >
-            <Link to={element.path}>
-              <p
-                className={
-                  matchRoute(element.path)
-                    ? "scale-125 transition-all p-3 duration-200 border-b-orange-400 border-b-4"
-                    : ""
-                }
-              >
-                {element.name}
-              </p>
-            </Link>
-          </div>
-        ))}
+    <div className="flex fixed w-[100%] bg-opacity-100 bg-[#ffffff] justify-between py-2 z-50 px-5">
+      <div className="flex justify-between">
+        <div className="m-3">
+          <img src={kaews_logo} alt="logo" className="h-10  w-10" />
+        </div>{" "}
+        <div className="m-3">
+          <img src={kaews_logo} alt="logo" className="h-10  w-10" />
+        </div>
+        <div className="m-3">
+          <img src={kaews_logo} alt="logo" className="h-10  w-10" />
+        </div>
       </div>
-      <div className="md:hidden">
-        <button onClick={toggleNavbar}>
-          {isOpen ? (
-            <IoMenu size={42} />
-          ) : (
-            <div className="flex flex-col justify-evenly items-center gap-3 w-[100vw] pt-5 pr-10">
-              <button
-                className="w-full flex justify-center"
-                onClick={toggleNavbar}
-              >
-                <IoIosClose
-                  className="hover:border-b-4 hover:border-b-orange-400 text-orange-600"
-                  size={70}
-                />
-              </button>
-              {NavItems.map((element) => (
-                <div
-                  key={element.index}
-                  className="p-3 hover:border-b-4 hover:border-b-orange-400 text-black w-32 flex justify-center items-center relative"
-                >
-                  <Link to={element.path}>
-                    <p
-                      className={
-                        matchRoute(element.path)
-                          ? "scale-125 transition-all duration-200"
-                          : ""
-                      }
-                    >
-                      {element.name}
-                    </p>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          )}
-        </button>
-      </div>
+
+      <div className="flex justify-between items-center pb-1">
+  {navLinks.map((link, index) => (
+    <div key={index} className="px-2 mx-2">
+      <NavLink
+        to={link.to}
+        className={`text-black p-2 md:text-md xl:text-lg font-bold ${
+          location.pathname === link.to ? ' border-b-4 border-orange-500' : ''
+        }`}
+      >
+        {link.text}
+      </NavLink>
+    </div>
+  ))}
+</div>
     </div>
   );
-}
+};
 
 export default Navbar2;
+
+
+
