@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 import Navbar2 from './Components/Navbar2/navbar2';
@@ -14,16 +14,17 @@ import Contact from './Pages/Contact/contact';
 const App = () => {
   return (
     <Router>
-      {/* <Navbar2 /> */}
-      <Switch>
-        <Route path="/" component={Home} />
+      <Navbar2 />
+
+       <Routes>
+       <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/members" component={Members} />
         <Route path="/events" component={Events} />
         <Route path="/gallery" component={Gallery} />
         <Route path="/blogs" component={Blogs} />
         <Route path="/contact" component={Contact} />
-      </Switch>
+       </Routes>
     </Router>
   );
 };
